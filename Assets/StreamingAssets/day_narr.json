@@ -1,0 +1,44 @@
+﻿
+{"Items":[
+	{
+		"read":0,
+		"name":"feathers",
+		"sleeplessness": [0,10],
+		"dreamlessness": [0,10],
+		"crime": [0,10],
+		"lights": [false, true, true],
+		"arc": [3,9],
+		"keywords": ["snow", "feathers"],
+		"prerequisites": ["none"],
+		"postrequisites": ["feathers", "snow"],
+		"vignette":"Is that snow... or feathers?"
+	},
+	{
+		"read":0,
+		"name":"strange light",
+		"sleeplessness": [0,10],
+		"dreamlessness": [0,10],
+		"crime": [0,10],
+		"lights": [true, true, true],
+		"arc": [3,9],
+		"keywords": ["day", "strange"],
+		"prerequisites": ["working"],
+		"postrequisites": ["none"],
+		"vignette":"The day light isn't quite right. daylight. day-Light..."
+	},
+	{
+		"read":0,
+		"name":"stolen child",
+		"sleeplessness": [0,10],
+		"dreamlessness": [0,10],
+		"crime": [10,20],
+		"lights": [false, true, true],
+		"arc": [3,9],
+		"keywords": ["crime"],
+		"prerequisites": ["none"],
+		"postrequisites": ["none"],
+		"vignette":"An unsettling headline: News of a stollen child, nearby."
+	}
+	]
+}
+
