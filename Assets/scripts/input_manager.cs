@@ -6,6 +6,7 @@ public class input_manager : MonoBehaviour
 {
 
 	public player_controller player_controller;
+	public day_changer dayChanger;
 
 	Vector3 cameraRight;
 	Vector3 cameraForward;
@@ -15,6 +16,7 @@ public class input_manager : MonoBehaviour
 	//other possible strings are: climbing, birdwatching
 
 	public bool canClimb = false;
+	public bool canGoHome = false;
 
 	public KeyCode keyUp = KeyCode.W;
 	public KeyCode keyDown = KeyCode.S;
@@ -48,19 +50,31 @@ public class input_manager : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		//climbing 
+		//going from canClimb to climbing  
 		if (Input.GetKeyDown(interact) && canClimb) 
 		{
-			//check the position of the player
-			//if the postition isn't on the right side of the lamppost reposition the player
+			//check the position of the player if the postition isn't on the right side of the lamppost reposition the player
+
 			player_controller.timeToRotate = true;
 			//timeToRotate is checked in player_controller fixed update.
 			//when true, it engages the RotateTowardsPole function
-			//this function:
-			//gives the player a short ray cast, and if it doesn't hit ANYTHING...
-			//rotate the player until it hits SOMETHING
+			//this function: gives the player a short ray cast, and if it doesn't hit ANYTHING...
+			//it rotates the player until it hits SOMETHING (it seems to hit the collider although its set to trigger.)
 			movement = "climbing";
 		}
+
+
+		//going from canGoHome to dayMode
+		if (Input.GetKeyDown(interact) && canGoHome) 
+		{
+			//dayMode movement is... um... no movement.
+			movement = "dayMode";
+
+			//day increase, fade to white (and then to black), and eventually... "record" your day.
+			dayChanger.ChangeTheDay ();
+			canGoHome = false;
+		}
+
 
 		if (movement == "climbing") 
 		{
@@ -97,6 +111,19 @@ public class input_manager : MonoBehaviour
 				player_controller.MoveDown (cameraForward);
 		}
 
-	
+
+		//birdWatching movement
+		if (movement == "birdwatching") 
+		{
+			//
+		}
+
+
+		//dayMode movement
+		if (movement == "dayMode")
+		{
+			//for now, I think... in day mode, all you can do is interact with the UI.
+		}
+
 	}
 }

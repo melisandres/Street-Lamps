@@ -22,22 +22,22 @@ public class test_modal_window : MonoBehaviour
 	//Sent to the Modal panel but with an icon
 	public void TestWHMI()
 	{
-		modalPanel.DayChoiceWithImage ("The moon is up. Time to leave bed, head into the world, and change the lights...", icon, TestWorkFunction, TestHomeFunction, TestMehFunction);
+		modalPanel.DayChoice ("The moon is up. Time to leave bed, head into the world, and change the lights...", icon, TestWorkFunction, TestHomeFunction, TestMehFunction);
 	}
 
 		
 
-	void TestWorkFunction()
+	public void TestWorkFunction()
 	{
 		displayManager.DisplayMessage ("another day, another dollar");
 	}
 
-	void TestHomeFunction()
+	public void TestHomeFunction()
 	{
 		displayManager.DisplayMessage ("stay in bed. forever.");
 	}
 
-	void TestMehFunction()
+	public void TestMehFunction()
 	{
 		displayManager.DisplayMessage ("Does it really matter, either way?");
 	}

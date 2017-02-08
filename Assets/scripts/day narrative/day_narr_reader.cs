@@ -39,9 +39,9 @@ public class day_narr_reader : MonoBehaviour
 	int sleeplessness = 0;
 	int dreamlessness = 0;
 	int crime = 0;
-	bool lightBright;
-	bool lightBlue;
-	bool lightOrange;
+	bool lightBright = false;
+	bool lightBlue = false;
+	bool lightOrange = false;
 	int today = 0;
 	public List <string> myKeyWords = new List<string>();
 	public List <string> myPrerequisites = new List<string>();
@@ -49,12 +49,15 @@ public class day_narr_reader : MonoBehaviour
 	public void Start()
 	{
 		ChooseDayNarrative ();
+		Debug.Log (ChooseDayNarrative ());
 	}
 
-	public void ChooseDayNarrative()
+	public string ChooseDayNarrative()
 	{
-		for(int i = 0; i < narratives.Length; i++)
+		string currentNarrative = "no string was chosen";
 
+
+		for(int i = 0; i < narratives.Length; i++)
 		{
 			int score = 0;
 
@@ -81,7 +84,12 @@ public class day_narr_reader : MonoBehaviour
 
 
 			if (score > 4)
-				Debug.Log (narratives [i].vignette);
+			currentNarrative = narratives [i].vignette;
+
+			//this will place each corresponding narrative in the variable in turn, until through with the list.
+			//I would prefer to add the score, and vignette to a dictionary, and then go through the 
+			//dictionary to chose the vignette with the highest score. But this is ok for now.
+
 			else 
 			{
 				Debug.Log (narratives [i].name + " didn't score high enough");
@@ -98,6 +106,6 @@ public class day_narr_reader : MonoBehaviour
 			//a "save game would then send that information to the Json file. 
 			// string narrativesJson = JsonHelper.ToJson(narratives);
 		}
-	
+		return currentNarrative;
 	}
 }

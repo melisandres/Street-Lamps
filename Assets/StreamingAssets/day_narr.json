@@ -15,6 +15,19 @@
 	},
 	{
 		"read":0,
+		"name":"begining",
+		"sleeplessness": [0,10],
+		"dreamlessness": [0,10],
+		"crime": [0,10],
+		"lights": [false, false, false],
+		"arc": [1,2],
+		"keywords": ["start", "morning"],
+		"prerequisites": ["none"],
+		"postrequisites": ["none"],
+		"vignette":"It's hard to sleep in the day... but not impossible."
+	},
+	{
+		"read":0,
 		"name":"strange light",
 		"sleeplessness": [0,10],
 		"dreamlessness": [0,10],
