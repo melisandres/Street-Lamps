@@ -38,13 +38,13 @@ public class input_manager : MonoBehaviour
 
 	void Update()
 	{
-		//cursor
-		if (Input.GetKeyDown (KeyCode.Escape))
-			player_controller.RetrieveTheCursor();
-
-		//rotation
-		if (Input.GetAxis ("Mouse X") > 0.09f || Input.GetAxis ("Mouse X") < -0.09f)
-			player_controller.RotateThePlayer ();
+//		//cursor
+//		if (Input.GetKeyDown (KeyCode.Escape))
+//			player_controller.RetrieveTheCursor();
+//
+//		//rotation
+//		if (Input.GetAxis ("Mouse X") > 0.09f || Input.GetAxis ("Mouse X") < -0.09f)
+//			player_controller.RotateThePlayer ();
 	}
 
 
@@ -58,8 +58,7 @@ public class input_manager : MonoBehaviour
 			player_controller.timeToRotate = true;
 			//timeToRotate is checked in player_controller fixed update.
 			//when true, it engages the RotateTowardsPole function
-			//this function: gives the player a short ray cast, and if it doesn't hit ANYTHING...
-			//it rotates the player until it hits SOMETHING (it seems to hit the collider although its set to trigger.)
+			//this function: rotates the player until a short raycast hits an object with the lampPost tag...
 			movement = "climbing";
 		}
 
@@ -84,6 +83,11 @@ public class input_manager : MonoBehaviour
 				player_controller.Climb ();	
 		}
 
+		if (movement == "autoClimbing") 
+		{
+			//this is where you lose all control and the player will just keep going up on thier own
+			//until they hit the TOP
+		}
 
 
 		//regular movement
@@ -115,7 +119,7 @@ public class input_manager : MonoBehaviour
 		//birdWatching movement
 		if (movement == "birdwatching") 
 		{
-			//
+			
 		}
 
 
@@ -123,6 +127,7 @@ public class input_manager : MonoBehaviour
 		if (movement == "dayMode")
 		{
 			//for now, I think... in day mode, all you can do is interact with the UI.
+			//so it's okay if this is empty....
 		}
 
 	}

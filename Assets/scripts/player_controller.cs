@@ -1,54 +1,57 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class player_controller : MonoBehaviour 
 {
 	public float accelForceNormal = 1000f;
-	public float accelForce = 1000f;
-	public float steeringForce = 1000f;
+	public float accelForce = 800f;
+	public float steeringForce = 800f;
 
 	public bool timeToRotate;
+	public bool autoClimbing;
+
+	public GameObject myLampPost;
 	public bool repositionPlayer;
 
-	void Start()
-	{
-		//set the cursor as invisible and locked
-		Cursor.visible = false;
-		Cursor.lockState = CursorLockMode.Locked;	
-	}
 
 	void FixedUpdate() 
 	{
 		if (timeToRotate)
 			RotateTowardsPole ();
 
+		if (autoClimbing)
+			Climb();
 	}
 
 
 	public void RotateTowardsPole()
 	{
-		Vector3 fwd = transform.TransformDirection(Vector3.forward);
+		//this solution is not perfect, because the minute the raycast hits the lamp-post you can start to climb, 
+		//which means that you won't be facing it directly... but almost. 
+		//I should probably use math in order to determine a specific point to face between player and lampPost...
+		//but I'll leave it at this for now. It mostly works.
 
-		if (Physics.Raycast(transform.position, fwd, 1)) 
+		Vector3 fwd = transform.TransformDirection(Vector3.forward);
+		RaycastHit hit;
+		int reach = 1;
+
+		if (Physics.Raycast (transform.position, fwd, out hit, reach) && hit.transform.tag == "lampPost")
 			timeToRotate = false;
 		else 
 			gameObject.transform.Rotate (0, 0.5f * steeringForce * Time.deltaTime, 0);
 	}
-
-
-
-	public void RetrieveTheCursor()
+		
+	public void Freeze()
 	{
-		Cursor.visible = true;
-		Cursor.lockState = CursorLockMode.None;
+		gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
 	}
 
-
-	public void RotateThePlayer()
+	public void UnFreeze()
 	{
-		gameObject.transform.Rotate (0, Input.GetAxis ("Mouse X") * steeringForce * Time.deltaTime, 0);
+		gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+		gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
 	}
+
 
 	//this is to Climb... its just... um... moving up, until you hit the Top
 	public void Climb()
@@ -85,6 +88,7 @@ public class player_controller : MonoBehaviour
 		direction = direction * -1; 
 		direction = direction.normalized;	
 		gameObject.GetComponent<Rigidbody> ().AddForce (direction * accelForce * Time.deltaTime);
+		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 0.1F);
 	}
 
 	public void MoveRight(Vector3 direction)
@@ -92,6 +96,7 @@ public class player_controller : MonoBehaviour
 		direction = direction * 1; 
 		direction = direction.normalized;	
 		gameObject.GetComponent<Rigidbody> ().AddForce (direction * accelForce * Time.deltaTime);
+		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 0.1F);
 	}
 
 	public void MoveUp(Vector3 direction)
@@ -99,6 +104,7 @@ public class player_controller : MonoBehaviour
 		direction = direction * 1; 
 		direction = direction.normalized;	
 		gameObject.GetComponent<Rigidbody> ().AddForce (direction * accelForce * Time.deltaTime);
+		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 0.1F);
 	}
 
 	public void MoveDown(Vector3 direction)
@@ -106,5 +112,6 @@ public class player_controller : MonoBehaviour
 		direction = direction * -1; 
 		direction = direction.normalized;	
 		gameObject.GetComponent<Rigidbody> ().AddForce (direction * accelForce * Time.deltaTime);
+		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 0.1F);
 	}
 }

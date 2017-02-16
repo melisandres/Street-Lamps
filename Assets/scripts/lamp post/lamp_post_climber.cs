@@ -9,6 +9,8 @@ public class lamp_post_climber : MonoBehaviour
 	public input_manager inputManager;
 	public GameObject climbingPrompt;
 
+	public GameObject myLampPost;
+
 
 	public void OnTriggerEnter (Collider other)
 	{
@@ -16,6 +18,7 @@ public class lamp_post_climber : MonoBehaviour
 		{
 			climbingPrompt.SetActive (true);
 			inputManager.canClimb = true;
+			other.gameObject.GetComponent<player_controller> ().myLampPost = myLampPost;
 		}
 	}
 

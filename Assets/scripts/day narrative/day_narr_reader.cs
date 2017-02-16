@@ -33,6 +33,9 @@ public class day_narr_reader : MonoBehaviour
 		public string vignette;
 	}
 
+	//struct Week {Monday, dasd, asdasd, asdasd};
+	//Week.Monday;
+
 
 
 	public day_narr_reader dayNarrReader;
