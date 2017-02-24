@@ -6,6 +6,7 @@ TagManager:
   tags:
   - cameraTrigger
   - lampPost
+  - speechBubble
   layers:
   - Default
   - TransparentFX

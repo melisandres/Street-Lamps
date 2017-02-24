@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 3bce9ad31e08e4d1e90a5e8a0ebc94e0
+timeCreated: 1487371809
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - test_inkJSONAsset: {fileID: 4900000, guid: f28bae3e6f16a4881a11b66b22de09c8, type: 3}
+  - canvas: {instanceID: 0}
+  - narrativePanel: {instanceID: 0}
+  - factBox: {instanceID: 0}
+  - theirSpeechBubble: {instanceID: 0}
+  - mySpeechBubble: {instanceID: 0}
+  - thoughtBox: {instanceID: 0}
+  - currentSpeaker: {instanceID: 0}
+  - text: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
