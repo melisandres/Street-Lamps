@@ -11,17 +11,16 @@ public class camera_switcher : MonoBehaviour
 	public Camera camera2;
 
 	public Camera currentCamera;
-	public Camera thisCamera;
 
 	void Start()
 	{
 		currentCamera = camera2;
 	}
 
-	public void ChangeCurrentCamera(Camera thisCamera) 
+	public void ChangeCurrentCamera(Camera myNextCamera) 
 	{
 		currentCamera.enabled = false;
-		currentCamera = thisCamera;
+		currentCamera = myNextCamera;
 		currentCamera.enabled = true;
 	}
 }

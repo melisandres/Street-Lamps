@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class input_manager : MonoBehaviour 
 {
-
+	public camera_movement_controller cameraMovementController;
 	public player_controller player_controller;
 	public day_changer dayChanger;
 
@@ -38,13 +38,6 @@ public class input_manager : MonoBehaviour
 
 	void Update()
 	{
-//		//cursor
-//		if (Input.GetKeyDown (KeyCode.Escape))
-//			player_controller.RetrieveTheCursor();
-//
-//		//rotation
-//		if (Input.GetAxis ("Mouse X") > 0.09f || Input.GetAxis ("Mouse X") < -0.09f)
-//			player_controller.RotateThePlayer ();
 	}
 
 
@@ -83,9 +76,10 @@ public class input_manager : MonoBehaviour
 				player_controller.Climb ();	
 		}
 
+
 		if (movement == "autoClimbing") 
 		{
-			//this is where you lose all control and the player will just keep going up on thier own
+			//this is where you lose all control and the player will just keep going up on their own
 			//until they hit the TOP
 		}
 
@@ -119,7 +113,18 @@ public class input_manager : MonoBehaviour
 		//birdWatching movement
 		if (movement == "birdwatching") 
 		{
-			
+			//I just wanna rotate the camera... 
+			if (Input.GetKey (keyLeft))
+				cameraMovementController.RotateCameraLeft();
+
+			if (Input.GetKey (keyRight))
+				cameraMovementController.RotateCameraRight();
+
+			if (Input.GetKey (keyUp))
+				cameraMovementController.RotateCameraUp();
+
+			if (Input.GetKey (keyDown))
+				cameraMovementController.RotateCameraDown();
 		}
 
 

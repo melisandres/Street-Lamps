@@ -22,7 +22,7 @@ public class lamp_post_transition : MonoBehaviour
 
 			//start a coroutine that blurs currentCamera
 			Camera myCamera = other.GetComponent<camera_switcher>().currentCamera;
-			gameObject.GetComponent<camera_blurring>().LetsBlurr(myCamera);
+			gameObject.GetComponent<camera_blurring>().LetsBlurr(myCamera, false, myCamera);
 		}
 	}
 }

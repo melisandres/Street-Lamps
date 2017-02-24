@@ -1,9 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class camera_blurring : MonoBehaviour 
 {
+	public GameObject player;
 	public float blurrTime;
 	public float displayTime;
 
@@ -11,20 +11,20 @@ public class camera_blurring : MonoBehaviour
 	private IEnumerator unblurrIt;
 
 
-	private Camera myCamera;
+	//private Camera myCamera;
 
 
-	public void LetsBlurr (Camera myCamera) 
+	public void LetsBlurr (Camera myCamera, bool blurAndUnblur, Camera myNextCamera) 
 	{
 		if (blurrIt != null) 
 		{
 			StopCoroutine (blurrIt);
 		}
-		blurrIt = BlurrIt (myCamera);
+		blurrIt = BlurrIt (myCamera, blurAndUnblur, myNextCamera);
 		StartCoroutine (blurrIt);
 	}
 
-	IEnumerator BlurrIt (Camera myCamera) 
+	IEnumerator BlurrIt (Camera myCamera, bool blurAndUnblur, Camera myNextCamera) 
 	{
 		myCamera.GetComponent<UnityStandardAssets.ImageEffects.BlurOptimized>().enabled = true;
 		int myBlurr = myCamera.GetComponent<UnityStandardAssets.ImageEffects.BlurOptimized> ().blurIterations;
@@ -38,6 +38,14 @@ public class camera_blurring : MonoBehaviour
 			myCamera.GetComponent<UnityStandardAssets.ImageEffects.BlurOptimized> ().blurIterations = myBlurr;
 			yield return null;
 		}
+
+		//this is called specifically when you are going down the lamp post
+		if (blurAndUnblur && myBlurr == 4) 
+		{
+			player.GetComponent<camera_switcher> ().ChangeCurrentCamera (myNextCamera);
+			LetsUnblurr (myNextCamera);
+		}
+			
 		yield return null;
 	}
 

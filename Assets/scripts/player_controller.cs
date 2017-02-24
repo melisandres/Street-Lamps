@@ -40,12 +40,16 @@ public class player_controller : MonoBehaviour
 		else 
 			gameObject.transform.Rotate (0, 0.5f * steeringForce * Time.deltaTime, 0);
 	}
-		
+
+
+	//I freeze the player position at the top of the lamppost
 	public void Freeze()
 	{
 		gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
 	}
 
+
+	//This unfreezes the player, while re-engaging the rotation constraints
 	public void UnFreeze()
 	{
 		gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
@@ -73,6 +77,7 @@ public class player_controller : MonoBehaviour
 		return(direction);
 	}
 		
+
 	public Vector3 GetCameraDirectionForward()
 	{
 		Vector3 direction = new Vector3 ();
@@ -91,6 +96,7 @@ public class player_controller : MonoBehaviour
 		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 0.1F);
 	}
 
+
 	public void MoveRight(Vector3 direction)
 	{
 		direction = direction * 1; 
@@ -99,6 +105,7 @@ public class player_controller : MonoBehaviour
 		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 0.1F);
 	}
 
+
 	public void MoveUp(Vector3 direction)
 	{
 		direction = direction * 1; 
@@ -106,6 +113,7 @@ public class player_controller : MonoBehaviour
 		gameObject.GetComponent<Rigidbody> ().AddForce (direction * accelForce * Time.deltaTime);
 		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 0.1F);
 	}
+
 
 	public void MoveDown(Vector3 direction)
 	{
